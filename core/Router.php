@@ -38,7 +38,7 @@ class Router
 
         if (!$callback) {
             $this->response->setStatusCode(404);
-            return 'NOT FOUND';
+            return $this->renderView('_404');
         }
 
         if (is_string($callback)) {
