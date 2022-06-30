@@ -45,14 +45,18 @@ class Router
             $this->renderView($callback);
         }
 
+        if (is_array($callback)) {
+			$callback[0] = new $callback[0]();
+		}
+
         return call_user_func($callback);
     }
 
-    private function renderView($view)
+    public function renderView($view, array $params = [])
     {
         // todo: user can create many folders with many views, so layouts too (make this)
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view, $params);
 
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
@@ -64,8 +68,12 @@ class Router
         return ob_get_clean();
     }
 
-    private function renderOnlyView($view)
+    private function renderOnlyView($view, array $params)
     {
+    	foreach ($params as $key => $value) {
+    		$$key = $value; // if $key = 'name' or 'post_id' or smth like that, $$ means that $key now $name/$post_id/$smth and it can be shown in a template
+		}
+
         ob_start();
         include_once Application::$ROOT_DIR."/views/{$view}.php";
         return ob_get_clean();
