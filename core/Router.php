@@ -34,7 +34,7 @@ class Router
         	4. and data (post, get, ect)
          */
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
 
         if (!$callback) {
