@@ -31,6 +31,7 @@ class Router
             1. a function
             2. a string to render view
             3. a class and a method in this class
+        	4. and data (post, get, ect)
          */
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
@@ -49,7 +50,7 @@ class Router
 			$callback[0] = new $callback[0]();
 		}
 
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
     }
 
     public function renderView($view, array $params = [])
