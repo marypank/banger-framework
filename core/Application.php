@@ -7,6 +7,7 @@ class Application
     public Router $router;
     public Request $request;
     public Response $response;
+    public Controller $controller;
 
     public static Application $APP;
     public static string $ROOT_DIR;
@@ -24,4 +25,14 @@ class Application
     {
         echo $this->router->resolve();
     }
+
+	public function getController()
+	{
+		return $this->controller;
+	}
+
+	public function setController(Controller $controller): void
+	{
+		$this->controller = $controller;
+	}
 }
