@@ -75,4 +75,14 @@ abstract class Model // abstract to prevent creation of instance
 		];
 	}
 
+	public function hasError(string $attribute)
+	{
+		return $this->errors[$attribute] ?? false;
+	}
+
+	public function getFirstError(string $attribute)
+	{
+		return $this->errors[$attribute][0] ?? false;
+	}
+
 }
