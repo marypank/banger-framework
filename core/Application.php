@@ -8,6 +8,7 @@ class Application
     public Request $request;
     public Response $response;
     public Controller $controller;
+    public Database $db;
 
     public static Application $APP;
     public static string $ROOT_DIR;
@@ -19,6 +20,8 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
+
+        $this->db = new Database();
     }
 
     public function run()
